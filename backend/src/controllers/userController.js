@@ -20,34 +20,24 @@ const User= require("../schema/user")
     }
   };
 
- const getUser=  async (req, res) => {
-    try {
-      const {id}= req?.body
-      const users = await User.findById(id);
-      res.send(users);
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  };
-
   const getAllUsers = async (req, res) => {
     try {
       const users = await User.find(); 
       res.status(200).json(users); 
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching users', error });
+      res.status(500).json({ message: 'Something Went Wrong', error });
     }
   };
 
-  const updateUser = async (req, res) => {
-    try {
-      const { id } = req?.params;
-      const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
-      res.json(updatedUser);
-    } catch (error) {
-      res.status(500).json({ message: 'Error updating user' });
-    }
-  };
+  // const updateUser = async (req, res) => {
+  //   try {
+  //     const { id } = req?.params;
+  //     const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+  //     res.json(updatedUser);
+  //   } catch (error) {
+  //     res.status(500).json({ message: 'User not updated, Something went wrong !' });
+  //   }
+  // };
 
   const deleteUsers = async (req, res) => {
     try {
@@ -55,9 +45,9 @@ const User= require("../schema/user")
       await User.deleteMany({ _id: { $in: ids } });
       res.json({ message: 'Users deleted successfully' });
     } catch (error) {
-      res.status(500).json({ message: 'Error deleting users' });
+      res.status(500).json({ message: 'User not deleted, Something went wrong ' });
     }
   };
 
-  module.exports={createUser,getUser,updateUser,deleteUsers,getAllUsers }
+  module.exports={createUser,deleteUsers,getAllUsers }
   
