@@ -9,7 +9,6 @@ export type Action =
    { type: 'SAVE'; payload: User[] }
   | { type: 'SELECT'; payload: User }
   | { type: 'DESELECT'; payload: User }
-//   | { type: 'CLEAR' }
   | { type: 'REMOVE'; payload: string[] };
 
 
@@ -29,8 +28,6 @@ export const userReducer = (state: State, action: Action): State => {
                 ...state,
                 selectedUsers: state.selectedUsers.filter(user => user._id !== action.payload._id),
             };
-        // case 'CLEAR':
-        //     return { ...state, selectedUsers: [] };
         case 'REMOVE':
             return {
                 ...state,

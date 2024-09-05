@@ -22,8 +22,6 @@ const UserList = () => {
     try {
       const res = await axios.get('https://randomuser.me/api');
       await axios.post(`${baseUrl}${createUser}`, res?.data?.results)
-
-      //   dispatch({ type: 'SAVE', payload: response });
     } catch (error) {
       console.error('Error fetching users:', error);
     }
