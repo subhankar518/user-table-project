@@ -55,25 +55,25 @@ const UserList = () => {
     }
   };
 
-  const sortUsers = [...state.users].sort((a, b) => {
+  const sortUsers =state?.users ? [...state?.users].sort((a, b) => {
     if (sort === 'asc') {
       return a.name.first.localeCompare(b.name.first);
     } else {
       return b.name.first.localeCompare(a.name.first);
     }
-  });
+  }) : null;
 
   const handleSortFunc = () => {
     setSort((prev) => (prev === 'asc' ? 'desc' : 'asc'));
   };
 
-  
+
   return (
     <div>
       <h2 className="text-2xl mb-4">User List</h2>
-      <div className="mb-4">
+      <div className="mb-5">
         <button
-          className="p-2 bg-blue-500 text-white"
+          className="p-2 bg-blue-600 text-white cursor"
           onClick={handleSortFunc}
         >
           Sort by Name: {sort === 'asc' ? 'Ascending' : 'Descending'}
@@ -99,7 +99,7 @@ const UserList = () => {
         ))}
       </ul>
       <button
-        className="mt-4 p-2 bg-red-500 text-white"
+        className="mt-4 p-2 bg-red-500 text-white cursor"
         onClick={deleteUser}
         disabled={state.selectedUsers.length === 0}
       >
