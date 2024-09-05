@@ -7,7 +7,7 @@ import { getAllData,createUser, baseUrl, deleteUsers } from '../Network/API';
 
 const UserList = () => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-//   const [allData,setAllData]= useState([])
+  const [sort,setSort]= useState("asc")
 
   useEffect(() =>{
     const callFunc= async()=>{
@@ -55,11 +55,32 @@ const UserList = () => {
     }
   };
 
+  const sortUsers = [...state.users].sort((a, b) => {
+    if (sort === 'asc') {
+      return a.name.first.localeCompare(b.name.first);
+    } else {
+      return b.name.first.localeCompare(a.name.first);
+    }
+  });
+
+  const handleSortFunc = () => {
+    setSort((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+  };
+
+  
   return (
     <div>
       <h2 className="text-2xl mb-4">User List</h2>
+      <div className="mb-4">
+        <button
+          className="p-2 bg-blue-500 text-white"
+          onClick={handleSortFunc}
+        >
+          Sort by Name: {sort === 'asc' ? 'Ascending' : 'Descending'}
+        </button>
+      </div>
       <ul className="space-y-2">
-        {state.users.map((user) => (
+        {sortUsers && sortUsers?.map((user) => (
           <li key={user._id} className="flex justify-between p-2 border-b">
             <div>
               {user.name.first} {user.name.last} - Age: {user.dob.age}

@@ -6,7 +6,7 @@ export interface State {
 }
 
 export type Action =
-  | { type: 'SAVE'; payload: User[] }
+   { type: 'SAVE'; payload: User[] }
   | { type: 'SELECT'; payload: User }
   | { type: 'DESELECT'; payload: User }
 //   | { type: 'CLEAR' }
